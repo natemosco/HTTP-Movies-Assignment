@@ -20,7 +20,7 @@ export default class SavedList extends Component {
             </NavLink>
           );
         })}
-        <div className="home-button">
+        <div className="home-button" onClick={() => this.props.setEdited(true)}>
           <Link to="/">Home</Link>
         </div>
       </div>
