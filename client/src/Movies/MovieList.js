@@ -21,7 +21,7 @@ export default class MovieList extends Component {
   componentWillUpdate(nextProps) {
     alert("wazzzzzzzup")
     if (nextProps.edited) {
-      alert("wazzzzzzzup 2")
+      alert("wazzzzzzzup 2") /**never getting this alert */
       axios
         .get("http://localhost:5000/api/movies")
         .then(res => {
