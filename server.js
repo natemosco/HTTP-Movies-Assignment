@@ -87,13 +87,24 @@ app.put("/api/movies/:id", (req, res) => {
       .status(422)
       .send("Make sure your request body has all the fields it needs");
   }
+  console.log(movies, "movies")
   movies = movies.map(movie => {
+    console.log(`${movie.id}`, "movie.id", req.params.id, "req params id")
     if (`${movie.id}` === req.params.id) {
-      return req.body;
+      let modifiedMovie = {
+        id: movie.id,
+        title: req.body.title,
+        metascore: req.body.metascore,
+        director: req.body.director,
+        stars: req.body.stars
+      }
+      console.log("in here?")
+      return modifiedMovie;
     }
     return movie;
   });
-  res.status(200).send(req.body);
+  console.log(movies, "movies")
+  res.status(200).send(movies);
 });
 
 app.delete("/api/movies/:id", (req, res) => {
@@ -103,7 +114,7 @@ app.delete("/api/movies/:id", (req, res) => {
   res.status(202).send(req.params.id);
 });
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.send("App is working 👍");
 });
 

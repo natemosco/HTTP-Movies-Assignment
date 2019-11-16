@@ -13,8 +13,23 @@ export default class MovieList extends Component {
   componentDidMount() {
     axios
       .get("http://localhost:5000/api/movies")
-      .then(res => this.setState({ movies: res.data }))
+      .then(res => {
+        this.setState({ movies: res.data })
+      })
       .catch(err => console.log(err.response));
+  }
+  componentWillUpdate(nextProps) {
+    alert("wazzzzzzzup")
+    if (nextProps.edited) {
+      alert("wazzzzzzzup 2") /**never getting this alert */
+      axios
+        .get("http://localhost:5000/api/movies")
+        .then(res => {
+          this.setState({ movies: res.data })
+          this.props.setEdited(false)
+        })
+        .catch(err => console.log(err.response));
+    }
   }
 
   render() {
